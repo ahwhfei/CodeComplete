@@ -6,16 +6,34 @@
     let targetLanguage = ['zh-cn', 'zh-tw', 'fr', 'ja', 'ko'];
     const sourceLanguageFile = 'en.json';
 
-    console.time('Translated Time');
     console.log('Translating...');
     let data = fs.readFileSync(sourceLanguageFile, 'utf-8');
+
+    let Rx = require('rx');
+    Rx.Observable.fromPromiseList = function (promises, errorHandle) {
+        return Rx.Observable.fromArray(promises)
+            .concatMap(p => {
+                let source = Rx.Observable.fromPromise(p);
+                if (errorHandle) {
+                    source.catch(errorHandle);
+                }
+
+                return source;
+            });
+    };
 
     // workaround for fs.readFile and readFileSync doesn't strip BOM markers
     data = data.replace(/^\uFEFF/, '');
     let languageObject = JSON.parse(data);
     fs.writeFile('en-us.json', JSON.stringify(languageObject));
 
+    let promises = [];
+
     targetLanguage.map(e => {
+        console.time(`Language ${e} Translated Time`);
+        
+        let translated = {};
+
         fs.writeFileSync(e+'.json', '');
 
         for (let key in languageObject) {
@@ -23,22 +41,31 @@
                 continue;
             }
 
-            // if (languageObject[key].indexOf('{{') >= 0
-            //     || languageObject[key].indexOf('http') >= 0) {
-            //     let r = languageObject[key].replace(/"/g, '\\\"');
-            //     let lanStr = '"' + key + '": "' + r + '", ';
-            //     fs.appendFileSync(e+'.json', lanStr);
-            //     continue;
-            // }
-
-            translate(languageObject[key], {to: e})
+            let translatePromise = translate(languageObject[key], {to: e})
                 .then(data => {
-                    let r = data.text.replace(/"/g, '\\\"');
-                    let lanStr = '"' + key + '": "' + r + '", ';
-                    fs.appendFileSync(e+'.json', lanStr);
+                    let languageObject = {};
+                    languageObject['originLanguage'] = key;
+                    languageObject['translatedLanguage'] = data.text;
+                    return languageObject;
                 });
-        }
-    });
 
-    console.timeEnd('Translated Time');
+            promises.push(translatePromise);
+        }
+
+        let count = 0;
+        let promiseObservable = Rx.Observable.fromPromiseList(promises, (err) => {
+            return (++count < (promises.length/3)) ? Rx.Observable.empty() : Rx.Observable.throw(err);
+        });
+
+        promiseObservable.subscribe(
+            data => {
+                translated[data.originLanguage] = data.translatedLanguage;
+            },
+            err => console.log(err),
+            () => {
+                fs.appendFileSync(e+'.json', JSON.stringify(translated));
+                console.timeEnd(`Language ${e} Translated Time`);
+            }
+        );
+    });
 })();

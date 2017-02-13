@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "google-translate-api": "^2.2.2"
+    "google-translate-api": "^2.2.2",
+    "rx": "^4.1.0"
   }
 }
