@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>两列等高布局</title>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clearfix {
+            zoom: 1
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            line-height: 0;
+            font-size: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+
+        .wrap {
+            width: 950px;
+            margin: 0 auto;
+            background: #ccc;
+        }
+
+        .content {
+            margin-left: 150px;
+            border-left: 1px solid #666;
+            background: #ddd;
+        }
+
+        .main {
+            float: left;
+            width: 100%;
+        }
+
+        .side {
+            float: left;
+            width: 150px;
+            margin-left: -950px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="content clearfix">
+            <div class="main">
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br />
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br /> 
+                中-等高吗？<br />
+            </div>
+            <div class="side">
+                左-等高吗？<br />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
