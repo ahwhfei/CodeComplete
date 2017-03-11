@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>CSS三角形</title>
+    <style type="text/css">
+            html,
+        body,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            width: 10px;
+            height: 10px;
+            border-top: 50px solid black;
+            border-right: 50px solid red;
+            border-bottom: 50px solid blue;
+            border-left: 50px solid orange;
+            margin: 10px auto;
+        }
+
+        .test2 {
+            width: 0;
+            height: 0;
+            border-top: 50px solid black;
+            border-right: 50px solid red;
+            border-bottom: 50px solid blue;
+            border-left: 50px solid orange;
+            margin: 10px auto;
+        }
+        .test3 {
+            width: 0;
+            height: 0;
+            border-right: 50px solid red;
+            border-bottom: 50px solid blue;
+            border-left: 50px solid orange;
+            margin: 10px auto;
+        }
+
+        .test-up{
+            width: 0;
+            height: 0;
+            border-right: 50px solid transparent;
+            border-bottom: 50px solid blue;
+            border-left: 50px solid transparent;
+            margin: 10px auto;
+        }
+        .test-right{
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-bottom: 50px solid transparent;
+            border-left: 50px solid orange;
+            margin: 10px auto;
+        }
+        .test-down{
+            width: 0;
+            height: 0;
+            border-top: 50px solid black;
+            border-right: 50px solid transparent;
+            border-left: 50px solid transparent;
+            margin: 10px auto;
+        }
+        .test-left{
+            width: 0;
+            height: 0;
+            border-top: 50px solid transparent;
+            border-right: 50px solid red;
+            border-bottom: 50px solid transparent;
+            margin: 10px auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="test"></div>
+    <div class="test2"></div>
+    <div class="test3"></div>
+
+    <div class="test-up"></div>
+    <div class="test-right"></div>
+    <div class="test-down"></div>
+    <div class="test-left"></div>
+</body>
+
+</html>
