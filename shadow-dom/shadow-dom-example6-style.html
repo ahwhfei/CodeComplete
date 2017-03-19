@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <style>
+        button {
+            font-size: 18px;
+            font-family: '华文行楷';
+        }
+    </style>
+    <button>我是一个普通的按钮</button>
+    <div></div>
+
+    <script>
+        var host = document.querySelector('div');
+        var root = host.createShadowRoot();
+        root.innerHTML = '<style>button { font-size: 24px; color: blue; } </style>' +
+            '<button>我是一个影子按钮</button>'
+    </script>
+</body>
+
+</html>

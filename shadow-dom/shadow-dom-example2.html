@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="my-widget">
+        <h1>我的组件的标题</h1>
+        <p>一些组件的内容</p>
+    </div>
+    <div class="my-other-widget">
+        <h1>我的另一个组件的标题</h1>
+        <p>一些另一个组件的内容</p>
+    </div>
+    <div class="widget">Hello, world!</div>
+    <script>
+        var host = document.querySelector('.widget');
+        var root = host.createShadowRoot();
+        root.textContent = '我在你的 div 里！';
+
+    </script>
+</body>
+
+</html>

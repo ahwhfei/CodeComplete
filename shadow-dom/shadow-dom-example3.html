@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="pokemon">
+        胖丁
+    </div>
+
+    <template class="pokemon-template">
+        <h1>一只野生的
+            <content></content> 出现了！</h1>
+    </template>
+
+    <script>
+        var host = document.querySelector('.pokemon');
+        var root = host.createShadowRoot();
+        var template = document.querySelector('.pokemon-template');
+        root.appendChild(document.importNode(template.content, true));
+    </script>
+</body>
+
+</html>

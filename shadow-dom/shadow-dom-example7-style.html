@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <style>
+        .widget {
+            text-align: center;
+        }
+    </style>
+
+    <div class="widget">
+        <p>Hello World!</p>
+    </div>
+
+    <script>
+        var host = document.querySelector('.widget');
+        var root = host.createShadowRoot();
+        root.innerHTML = '<style>' +
+            ':host {' +
+            '  border: 2px dashed red;' +
+            '  text-align: left;' +
+            '  font-size: 28px;' +
+            '} ' +
+            '</style>' +
+            '<content></content>';
+    </script>
+</body>
+
+</html>

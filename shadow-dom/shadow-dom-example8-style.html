@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <p>我的段落</p>
+    <div>我的 Div</div>
+    <button>我的按钮</button>
+
+    <!-- Our template -->
+    <template class="shadow-template">
+        <style>
+             :host(p) {
+                color: blue;
+            }
+            
+             :host(div) {
+                color: green;
+            }
+            
+             :host(button) {
+                color: red;
+            }
+            
+             :host(*) {
+                font-size: 24px;
+            }
+        </style>
+        <content select=""></content>
+    </template>
+
+    <script>
+        // 给每一个元素创建一个影子根
+        var root1 = document.querySelector('p').createShadowRoot();
+        var root2 = document.querySelector('div').createShadowRoot();
+        var root3 = document.querySelector('button').createShadowRoot();
+
+        // 对于每一个影子根使用同一个模板
+        var template = document.querySelector('.shadow-template');
+
+        // 把每一个模板嵌入影子根中，注意一下不同的 :host 样式对显示效果的影响
+        root1.appendChild(document.importNode(template.content, true));
+        root2.appendChild(document.importNode(template.content, true));
+        root3.appendChild(document.importNode(template.content, true));
+    </script>
+</body>
+
+</html>

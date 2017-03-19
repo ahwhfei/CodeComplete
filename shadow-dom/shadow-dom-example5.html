@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="bio">
+        <span class="first-name">劳勃</span>
+        <span class="last-name">多德森</span>
+        <span class="city">旧金山</span>
+        <span class="state">加利福尼亚州</span>
+        <p>我专注前端开发（HTML/CSS/JavaScript），还会一点 Node 和 Ruby。</p>
+        <p>从事写作，偶尔也会写点博客。</p>
+        <p>尽管我是南方人，但我最近都在美丽的旧金山工作和生活。</p>
+    </div>
+
+    <template class="bio-template">
+        <dl>
+            <dt>姓氏</dt>
+            <dd>
+                <content select=".last-name"></content>
+            </dd>
+            <dt>名字</dt>
+            <dd>
+                <content select=".first-name"></content>
+            </dd>
+            <dt>城市</dt>
+            <dd>
+                <content select=".city"></content>
+            </dd>
+            <dt>州</dt>
+            <dd>
+                <content select=".state"></content>
+            </dd>
+        </dl>
+        <p>
+            <!-- 贪心插入点（Greedy Insertion Points）-->
+            <content select=""></content>
+        </p>
+    </template>
+
+    <script>
+        var host = document.querySelector('.bio');
+        var root = host.createShadowRoot();
+        var template = document.querySelector('.bio-template');
+        root.appendChild(template.content);
+    </script>
+</body>
+
+</html>
